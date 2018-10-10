@@ -63,7 +63,9 @@ export class RestProvider {
   register(mobile,nickname, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlRegister + "?mobile=" + mobile +"&nickname=" + nickname +"&password=" + password);
   }
-
+  saveQuestion(userId,title,content):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlQuestionSave+'?userid='+userId+'&title='+title+'&content='+content)
+  }
   /**
    * 登录，密码 MD5 加密后的登录功能
    * 
@@ -75,7 +77,15 @@ export class RestProvider {
   loginWithMd5(mobile, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlLoginWithMd5 + "?mobile=" + mobile + "&password=" + password);
   }
-
+/**
+ *
+ *请求首页的feeds流
+ * @returns {Observable<string[]>}
+ * @memberof RestProvider
+ */
+getFeeds():Observable<string[]>{
+  return this.getUrlReturn(this.apiUrlFeeds)
+}
   /**
    * 全局获取 HTTP 请求的方法
    * @Parry

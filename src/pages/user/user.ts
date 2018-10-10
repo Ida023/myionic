@@ -3,6 +3,7 @@ import { NavController, NavParams,ModalController,LoadingController, ToastContro
 import { Storage } from '@ionic/storage';
 import { BaseUI } from '../../common/baseui';
 import { RestProvider } from '../../providers/rest/rest';
+import {HeadfacePage} from '../headface/headface'
 /**
  * Generated class for the UserPage page.
  *
@@ -59,6 +60,9 @@ export class UserPage extends BaseUI {
              })
            }   
      })
+  }
+  gotoHeadFace(){
+    this.navCtrl.push(HeadfacePage)
   }
   loadUserPage() {
     this.storage.get('UserId').then((val) => {
