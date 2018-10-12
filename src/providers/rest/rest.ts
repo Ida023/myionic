@@ -30,7 +30,10 @@ export class RestProvider {
   private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
   private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list?index=1&number=10';
   private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
+  private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
+
   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
+  private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
 
   /**
    * 根据用户的手机号码和密码进行登录
@@ -43,7 +46,37 @@ export class RestProvider {
   login(mobile, password): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlLogin + "?mobile=" + mobile + "&password=" + password);
   }
+  /**
+   *获取问题详情
+   *
+   * @param {*} id
+   * @returns {Observable<string[]>}
+   * @memberof RestProvider
+   */
+  getQuestion(id):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlGetQuestion+'?id='+id)
+  }
+  answer(userId,questionId,content):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlAnswer+'?userid='+userId+'&questionid='+questionId+'&content='+content)
+  }
+  getQuestions():Observable<string[]>{
+     return this.getUrlReturn(this.apiUrlQuestionList)
+  }
+  /**
+   *获取问题的详情，传递userid到当前用户有没有关注此问题
+   *
+   * @param {*} questionId
+   * @param {*} userId
+   * @returns {Observable<string[]>}
+   * @memberof RestProvider
+   */
+  getQuestionWithUser(questionId,userId):Observable<string[]>{
+    return  this.getUrlReturn(this.apiUrlGetQuestionWithUser+ "?id=" + questionId + "&userid=" + userId);
 
+  }
+  saveFavourite(questionId,userId):Observable<string[]>{
+    return  this.getUrlReturn(this.apiUrlSaveFavourite+ "?questionid=" + questionId + "&userid=" + userId);
+  }
   getUserInfo(userId):Observable<string[]>{
     return this.getUrlReturn(this.apiUrlUserInfo+'?userid='+userId)
   }

@@ -7,12 +7,35 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>details</ion-title>
+    <ion-title>{{question?.ContentTitle}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content >
+ <ion-card>
+   <ion-card-content>
+     {{question?.Content}}
+     <p>{{question?.LikeCount}}个关注 &nbsp; &nbsp; &nbsp; &nbsp;{{question?.CommentCount}}个回答</p>
+     <button ion-button small  color="primary" [disabled]="isMyQuestion" (click)="showAnswerPage()">
+      <ion-icon name="add" ></ion-icon>
+          回答 </button>
+     <button ion-button small color="secondary" (click)="saveFavourite()">
+      {{IsFavourite ? '取消关注':'关注'}}
+     </button>
+   </ion-card-content>
+ </ion-card>
+ <ion-card  *ngFor="let a of answers">
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="{{a.HeadFace}}" alt="">
+    </ion-avatar>
+    <p>{{a.UserNickName}}
+    </p>
+  </ion-item>
+  <ion-card-content>
+    <p>
+      {{a.Content}}
+    </p>
+    <p class="answer_date">{{a.CreateDateTime}}</p>
+  </ion-card-content>
+</ion-card>
 </ion-content>
